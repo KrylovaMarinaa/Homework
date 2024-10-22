@@ -1,42 +1,51 @@
 public class Main {
     public static void main (String [] args) {
-        //Задание 1 - вывод информации о сотруднике в консоль
+        System.out.println("\n----------------------1 Задание --------------------\n");
 
-        System.out.println("Задание 1 - вывод информации о сотруднике в консоль");
 
-        Employee employee = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
-        employee.employeeToString();
+        Dog dog1 = new Dog("Бобик");
+        Cat cat1 = new Cat("Мурзик");
+        Cat cat2 = new Cat("Барсик");
 
-        System.out.println("\n" + "Задание 2 - массив из 5 сотрудников:");
+        dog1.run(150);
+        dog1.swim(5);
 
-        Employee[] employees = new Employee[5];
+        cat1.run(150);
+        cat1.swim(5);
 
-        employees[0] = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
-        employees[1] = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
-        employees[2] = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
-        employees[3] = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
-        employees[4] = new Employee("Иванов Иван Иванович", "Программист",
-                "ivan@mail.com", "+7 962 857 38 21", 40000, 25);
+        Bowl bowl = new Bowl(2);
 
-        for (int i = 0; i < employees.length; i++) {
+        cat1.eat(bowl);
+        cat2.eat(bowl);
 
-            System.out.println("\n" + "Сотрудник " + (i + 1) + " :");
 
-            employees[i].employeeToString();
-        }
+        bowl.addFood(3);
 
-        System.out.println("\n" + "Задание 3 - парк со внутренник классом аттракционы");
+        cat2.eat(bowl);
+        cat1.eat(bowl);
 
-        Park park = new Park("Парк 1");
-        park.addAttraction("Парк 1", "10:00 - 22:00", 300.5);
-        park.addAttraction("Парк 2", "10:00 - 22:00", 300.5);
-        park.displayAttractions();
+        System.out.println("Количество еды в миске: " + bowl.getFoodAmount());
+
+        System.out.println("Количество созданных животных: " + Animal.getAnimalCount());
+        System.out.println("Количество созданных собак: " + Dog.getDogCount());
+        System.out.println("Количество созданных котов: " + Cat.getCatCount());
+
+
+
+        System.out.println("\n----------------------2 Задание --------------------\n");
+
+
+        Shape circle = new Circle(5, "Синий", "Черный");
+        Shape rectangle = new Rectangle(4, 6, "Красный", "Голубой");
+        Shape triangle = new Triangle(3, 4, 5, "Фиолетовый", "Зеленый");
+
+        System.out.println(circle.getSpecifications()+'\n');
+        System.out.println(rectangle.getSpecifications()+'\n');
+        System.out.println(triangle.getSpecifications()+'\n');
+
 
 
     }
+
+
 }
