@@ -1,51 +1,88 @@
-public class Main {
+public class Main extends Exception{
     public static void main (String [] args) {
-        System.out.println("\n----------------------1 Задание --------------------\n");
 
+        int sum = 0;
 
-        Dog dog1 = new Dog("Бобик");
-        Cat cat1 = new Cat("Мурзик");
-        Cat cat2 = new Cat("Барсик");
+        String[][] correctArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
 
-        dog1.run(150);
-        dog1.swim(5);
+        String[][] incorrectSizeArray = {
+                {"1", "2", "3"},
+                {"4", "5", "6"}
+        };
 
-        cat1.run(150);
-        cat1.swim(5);
+        String[][] incorrectDataArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "HelloWord!!!!", "12"},
+                {"13", "14", "15", "16"}
+        };
 
-        Bowl bowl = new Bowl(2);
+        try {
+            sum = checkingTheArray(correctArray);
+            System.out.println("Сумма всех элементов в массиве: " + sum);
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.out.println(e.getMessage());
+        }
 
-        cat1.eat(bowl);
-        cat2.eat(bowl);
+        try {
+            sum = checkingTheArray(incorrectSizeArray);
+            System.out.println("Сумма всех элементов в массиве: " + sum);
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.out.println(e.getMessage());
+        }
 
+        try {
+            sum = checkingTheArray(incorrectDataArray);
+            System.out.println("Сумма всех элементов в массиве: " + sum);
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.out.println(e.getMessage());
+        }
 
-        bowl.addFood(3);
-
-        cat2.eat(bowl);
-        cat1.eat(bowl);
-
-        System.out.println("Количество еды в миске: " + bowl.getFoodAmount());
-
-        System.out.println("Количество созданных животных: " + Animal.getAnimalCount());
-        System.out.println("Количество созданных собак: " + Dog.getDogCount());
-        System.out.println("Количество созданных котов: " + Cat.getCatCount());
-
-
-
-        System.out.println("\n----------------------2 Задание --------------------\n");
-
-
-        Shape circle = new Circle(5, "Синий", "Черный");
-        Shape rectangle = new Rectangle(4, 6, "Красный", "Голубой");
-        Shape triangle = new Triangle(3, 4, 5, "Фиолетовый", "Зеленый");
-
-        System.out.println(circle.getSpecifications()+'\n');
-        System.out.println(rectangle.getSpecifications()+'\n');
-        System.out.println(triangle.getSpecifications()+'\n');
 
 
 
     }
+
+    static class MyArraySizeException extends Exception {
+        public MyArraySizeException(String message) {
+            super(message);
+        }
+    }
+
+    static class MyArrayDataException extends Exception {
+        public MyArrayDataException(String message) {
+            super(message);
+        }
+    }
+
+    //Сам метод
+
+    public static int checkingTheArray(String[][] array) throws MyArraySizeException, MyArrayDataException {
+        if (array.length != 4 || array[0].length != 4) {
+            throw new MyArraySizeException("Неверный размер массива");
+        }
+
+        int sum = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                try {
+                    sum += Integer.parseInt(array[i][j]);
+                } catch (NumberFormatException e) {
+                    throw new MyArrayDataException("Неверный формат данных в ячейке [" + i + "][" + j + "] : '" + array[i][j] + "'");
+                }
+            }
+        }
+
+        return sum;
+    }
+
+
 
 
 }
